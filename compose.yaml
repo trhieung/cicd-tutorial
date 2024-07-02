@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+  server:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./compose/server/Dockerfile
+    entrypoint: /app/compose/server/server-entrypoint.sh
+    volumes:
+      - /var/djvite:/var/djvite
+    expose:
+      - 8000
+    ports:
+      - 8000:8000
+    environment:
+      DEBUG: "True"
+      DJANGO_DB: postgresql
+      POSTGRES_HOST: db
+      POSTGRES_NAME: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_PORT: 5432
+    depends_on:
+      - db
+
+  # Vite-typscript
+  vite-ts:
+    build:
+      context: .
+      dockerfile: ./compose/client/Dockerfile
+    volumes:
+      - /var/djvite:/var/djvite
+    expose:
+      - 5173
+    ports:
+      - 5173:5173
+    environment:
+      - NODE_ENV=development
+      - VITE_APP_API_BASE_URL=http://server:8000
+    depends_on:
+      - server
+
+  db:
+    image: postgres:13.0-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+
+volumes:
+  static_volume: {}
+  postgres_data: {}
