@@ -1,26 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('build') {
+    stage('verify tooling') {
       steps {
-        echo 'Building ...'
-        sh 'docker compose build --no-cache'
+        sh '''
+          docker info
+          docker version
+          docker compose version
+          curl --version
+          jq --version
+          git --version
+        '''
       }
     }
-
-    stage('test') {
-      steps {
-        echo 'Testing ...'
-        echo 'Not having test available yet'
-      }
-    }
-
-    stage('deploy') {
-      steps {
-        echo 'Deploying ...'
-        sh 'docker compose up -d'
-      }
-    }
-
   }
 }
