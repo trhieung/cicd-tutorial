@@ -17,12 +17,6 @@ pipeline {
         '''
       }
     }
-    stage('Prune Docker data'){
-      steps {
-        echo 'Prune all volume data'
-        sh 'docker system prune -a --volumes -f'
-      }
-    }
     stage('Start Container') {
       steps {
         sh 'docker compose up -d --no-color --wait'
