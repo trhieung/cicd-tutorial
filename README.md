@@ -1,16 +1,22 @@
 # cicd-tutorial
+Personal studies...
 
-## help cmd
-docker compose up -d --build
+# Table of Contents
+-   [Requirements](#requirements)
+-   [Source Code](#souce-code)
+    - [Front-end](#front-end)
+    - [Back-end](#back-end)
+    - [Database](#database)
+    - [cicd-setting](#cicd)
+-   [Guilder](#guilder)
 
-docker compose down
+## Requirements
 
-### db cml
-PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres
+## Souce Code
+### Front-end
+### Back-end
+### Database
+### [CiCd](./jenkin-tutorial/)
 
-cmd                     |   purpose
------------------------------------------------------------------
-\dn                     |   List all scheme
-\dt (or \dt *.*)        |   Table in in all schemas
-\dt public.*            |   List all table in scheme name=public
+## Guilder
 
