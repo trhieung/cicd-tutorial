@@ -14,6 +14,7 @@ pipeline {
     }
     stage('Start container'){
       steps{
+        sh 'docker network create jenkins'
         sh 'docker compose up -d --no-color --wait'
         sh 'docker compose ps'
       }
