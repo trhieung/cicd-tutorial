@@ -12,5 +12,11 @@ pipeline {
         '''
       }
     }
+    stage('build'){
+      steps {
+        echo 'Building...'
+        sh 'docker compose build --no-cache'
+      }
+    }
   }
 }
