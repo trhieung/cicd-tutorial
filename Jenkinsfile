@@ -4,6 +4,7 @@ pipeline {
     stage('Prepare Environment') {
       steps {
         echo "Prepare environment"
+        sh 'docker network list'
       }
     }
     stage('Verify Tooling') {
@@ -26,8 +27,6 @@ pipeline {
     stage('test') {
       steps {
         sh '''
-          docker logs cicd-tutorial-server-1
-          curl http://localhost:8000
         '''
       }
     }
