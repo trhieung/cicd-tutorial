@@ -1,13 +1,24 @@
-<!-- # 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 -->
+
 # Tutorial
+Following the tutorial [here](https://www.jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/) giving the requirements to run the project
+# Table of Contents
+  - [Requirements](#requirements)
+  - [Guilder](#guilder)
 
-following the tutorial [here](https://www.jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/)
 
-## network
-- check available network for jenkin or create new with this ```docker network create jenkins```
+## Requirements
+Need 2 container which help run container in side the jenkins application
+  - [container run docker server](#subsetting-for-execure-docker-command-in-jenkin)
+  - [container run jenkin with blueocean extension](#run-jenkin-with-attribute)
 
-## subsetting for execure docker command in jenkin
-- using docker:dind image
+## Guilder
+
+### Network
+- check available network for jenkin or create new with this 
+```docker network create jenkins```
+
+### Subsetting for execure docker command in jenkin
+- Using docker:dind image
 ```
 docker run --name jenkins-docker --rm --detach \
   --privileged --network jenkins --network-alias docker \
@@ -18,7 +29,7 @@ docker run --name jenkins-docker --rm --detach \
   docker:dind --storage-driver overlay2
 ```
 
-## run jenkin with attribute
+### Run jenkin with attribute
 ```
 docker run --name jenkins-blueocean --detach \
   --network jenkins --env DOCKER_HOST=tcp://docker:2376 \
@@ -31,5 +42,5 @@ docker run --name jenkins-blueocean --detach \
   --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \
   myjenkins-blueocean:2.452.2-1
 ```
-## access docker log blueocean to get the key
+### Get begin key for setting jenkins
 - ```docker logs myjenkins-blueocean:2.452.2-1```
