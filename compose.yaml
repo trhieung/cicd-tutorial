@@ -1,5 +1,9 @@
 version: "3.8"
 
+networks:
+  jenkins:
+    external: true
+
 services:
   server:
     restart: unless-stopped
@@ -13,6 +17,8 @@ services:
       - 8000
     ports:
       - 8000:8000
+    networks:
+      - jenkins
     environment:
       DEBUG: "True"
       DJANGO_DB: postgresql
@@ -35,6 +41,8 @@ services:
       - 5173
     ports:
       - 5173:5173
+    networks:
+      - jenkins
     environment:
       - NODE_ENV=development
       - VITE_APP_API_BASE_URL=http://server:8000
@@ -54,6 +62,8 @@ services:
       - 5432
     ports:
       - 5432:5432
+    networks:
+      - jenkins
 
 volumes:
   static_volume: {}
