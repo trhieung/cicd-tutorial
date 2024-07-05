@@ -30,18 +30,10 @@ pipeline {
       steps {
         sh '''
         docker logs cicd-tutorial-db-1
+        docker logs cicd-tutorial-server-1
         docker logs cicd-tutorial-vite-ts-1
+        curl http://172.18.0.3:8000
         '''
-        echo 'check server'
-        script {
-          def count = 0
-          while (count < 5) {
-              sh 'docker logs cicd-tutorial-server-1'
-              count++
-              sleep 5
-          }
-        }
-        sh 'curl http://172.18.0.3:8000'
       }
     }
   }
