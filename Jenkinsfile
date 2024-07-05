@@ -29,6 +29,11 @@ pipeline {
         sh 'docker compose ps'
       }
     }
+    stage('test') {
+      steps {
+        sh 'curl http://localhost:8000'
+      }
+    }
   }
   post {
     always {
