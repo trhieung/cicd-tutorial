@@ -4,6 +4,7 @@ pipeline {
     stage('Prepare Environment') {
       steps {
         echo "Prepare environment"
+      }
     }
     stage('Verify Tooling') {
       steps {
