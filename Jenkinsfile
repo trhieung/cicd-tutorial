@@ -25,7 +25,10 @@ pipeline {
     }
     stage('test') {
       steps {
-        sh 'curl http://localhost:8000'
+        sh '''
+          curl http://localhost:8000
+          docker logs cicd-tutorial-server-1
+        '''
       }
     }
   }
