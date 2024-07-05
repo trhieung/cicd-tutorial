@@ -1,7 +1,18 @@
 pipeline {
   agent any
   stages {
-    stage('verify tooling') {
+    stage('Prepare Environment') {
+      steps {
+        script {
+          // Ensure the Docker network exists
+          def networkExists = sh(script: "docker network ls | grep -w jenkins", returnStatus: true) == 0
+          if (!networkExists) {
+            sh 'docker network create jenkins'
+          }
+        }
+      }
+    }
+    stage('Verify Tooling') {
       steps {
         sh '''
           docker info
@@ -12,37 +23,43 @@ pipeline {
         '''
       }
     }
-    stage('Start container'){
-      steps{
-        sh 'docker network create jenkins'
+    stage('Start Container') {
+      steps {
         sh 'docker compose up -d --no-color --wait'
         sh 'docker compose ps'
       }
     }
-    stage('Wait for service'){
+    stage('Wait for Service') {
       steps {
         script {
-          def retries = 5
+          def retries = 10 // Increase retries
+          def sleepTime = 10 // Increase sleep duration
+          def success = false
+
           while (retries > 0) {
-            if (sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://server:8000/users/', returnStatus: true) == 0) {
+            def httpCode = sh(script: 'curl -s -o /dev/null -w "%{http_code}" http://server:8000/users/', returnStatus: true)
+            if (httpCode == 200) {
               echo "Service is up and running!"
+              success = true
               break
             } else {
-              echo "Service not available yet. Retrying..."
-              sleep 5
+              echo "Service not available yet. HTTP status: ${httpCode}. Retrying..."
+              sleep sleepTime
               retries--
             }
           }
-          if (retries == 0) {
+
+          if (!success) {
+            sh 'docker compose logs server' // Print server logs for debugging
             error "Service did not become available in time"
           }
         }
       }
     }
-    stage('Run test against the container'){
+    stage('Run Test Against the Container') {
       steps {
         echo 'Testing...'
-        sh 'curl http://0.0.0.0:8000/users/'
+        sh 'curl http://server:8000/users/'
       }
     }
   }
