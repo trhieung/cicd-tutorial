@@ -33,8 +33,6 @@ pipeline {
         docker logs cicd-tutorial-server-1
         docker logs cicd-tutorial-vite-ts-1
         '''
-      }
-      steps {
         echo 'check server'
         script {
           def count = 0
