@@ -41,7 +41,7 @@ pipeline {
               sleep 5
           }
         }
-        sh 'curl http://localhost:8000'
+        sh 'curl http://172.18.0.3:8000'
       }
     }
   }
