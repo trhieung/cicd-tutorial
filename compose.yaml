@@ -11,8 +11,10 @@ services:
       - /var/djvite:/var/djvite
     expose:
       - 8000
+      - 8888
     ports:
       - 8000:8000
+      - 8888:8888
     environment:
       DEBUG: "True"
       DJANGO_DB: postgresql
