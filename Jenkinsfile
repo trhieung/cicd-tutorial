@@ -23,7 +23,7 @@ pipeline {
         sh 'docker compose up -d --no-color --wait'
         sh 'docker compose ps'
         sh 'docker network list'
-        sh 'docker inspect cicd-cicd_tutorial_network'
+        sh 'docker inspect cicd_tutorial_network'
       }
     }
     stage('test') {
