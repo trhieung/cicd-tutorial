@@ -25,6 +25,8 @@ services:
       POSTGRES_PORT: 5432
     depends_on:
       - db
+    networks:
+      - my-proxy-net
 
   # Vite-typscript
   vite-ts:
@@ -42,6 +44,8 @@ services:
       - VITE_APP_API_BASE_URL=http://localhost:8000
     depends_on:
       - server
+    networks:
+      - my-proxy-net
 
   db:
     image: postgres:13.0-alpine
@@ -56,10 +60,13 @@ services:
       - 5432
     ports:
       - 5432:5432
+    networks:
+      - my-proxy-net
 
 networks:
-  default:
-    name: cicd_tutorial_network
+  my-proxy-net:
+    external:
+      name: jenkins
 
 volumes:
   static_volume: {}
