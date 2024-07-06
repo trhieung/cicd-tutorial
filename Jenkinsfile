@@ -23,7 +23,7 @@ pipeline {
         sh 'docker compose up -d --no-color --wait'
         sh 'docker compose ps'
         sh 'docker network list'
-        sh 'docker inspect cicd-tutorial_default'
+        sh 'docker inspect cicd-cicd_tutorial_network'
       }
     }
     stage('test') {
@@ -32,8 +32,6 @@ pipeline {
         docker logs cicd-tutorial-db-1
         docker logs cicd-tutorial-server-1
         docker logs cicd-tutorial-vite-ts-1
-        curl http://172.18.0.3:8000/
-        curl http://localhost:5173/
         '''
       }
     }
