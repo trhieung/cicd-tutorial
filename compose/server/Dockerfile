@@ -1,6 +1,6 @@
 FROM python:3.10-alpine
 
-RUN apk update && apk add python3-dev gcc libc-dev
+RUN apk update && apk add python3-dev gcc libc-dev curl
 
 WORKDIR /app
 
