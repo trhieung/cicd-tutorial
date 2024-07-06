@@ -57,6 +57,10 @@ services:
       - 5432:5432
     command: ["postgres", "-c", "listen_addresses=*"] 
 
+networks:
+  default:
+    name: cicd_tutorial_network
+
 volumes:
   static_volume: {}
   postgres_data: {}
