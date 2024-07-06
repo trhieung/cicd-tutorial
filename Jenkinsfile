@@ -32,7 +32,8 @@ pipeline {
         docker logs cicd-tutorial-db-1
         docker logs cicd-tutorial-server-1
         docker logs cicd-tutorial-vite-ts-1
-        curl http://0.0.0.0:8000
+        curl http://172.18.0.3:8000/
+        curl http://localhost:5173/
         '''
       }
     }
