@@ -29,9 +29,9 @@ pipeline {
     stage('test') {
       steps {
         sh '''
-        docker logs cicd-tutorial-db-1
-        docker logs cicd-tutorial-server-1
-        docker logs cicd-tutorial-vite-ts-1
+        docker logs cicd-pipeline-db-1
+        docker logs cicd-pipeline-server-1
+        docker logs cicd-pipeline-vite-ts-1
         '''
       }
     }

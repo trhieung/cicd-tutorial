@@ -106,6 +106,14 @@ DATABASES_ALL = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
+    DB_POSTGRESQL: {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+        "USER": os.environ.get("POSTGRES_USER", "postgres"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
+        "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
+    },
     # DB_POSTGRESQL: {
     #     "ENGINE": "django.db.backends.postgresql",
     #     "HOST": os.environ.get("POSTGRES_HOST", "0.0.0.0"),
@@ -114,15 +122,14 @@ DATABASES_ALL = {
     #     "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
     #     "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
     # },
-
-    DB_POSTGRESQL: {
-        "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "NAME": os.environ.get("POSTGRES_NAME"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "PORT": int(os.environ.get("POSTGRES_PORT")),
-    },
+    # DB_POSTGRESQL: {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "HOST": os.environ.get("POSTGRES_HOST"),
+    #     "NAME": os.environ.get("POSTGRES_NAME"),
+    #     "USER": os.environ.get("POSTGRES_USER"),
+    #     "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+    #     "PORT": int(os.environ.get("POSTGRES_PORT")),
+    # },
 }
 
 ## Using Postgres
