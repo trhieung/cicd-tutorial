@@ -29,7 +29,11 @@ docker run --name jenkins-docker --rm --detach \
   docker:dind --storage-driver overlay2
 ```
 
-### Run jenkin with attribute
+### Build and Run jenkin with attribute
+```
+docker build -t myjenkins-blueocean:2.452.3-1 .
+```
+
 With semi-real implementation, cuz try to restart when fail
 ```
 docker run --name jenkins-blueocean --detach \
@@ -41,7 +45,7 @@ docker run --name jenkins-blueocean --detach \
   --volume "$HOME":/home \
   --restart=on-failure \
   --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \
-  myjenkins-blueocean:2.452.2-1
+  myjenkins-blueocean:2.452.3-1
 ```
 or just for testing with rm container after stop
 ```
@@ -53,7 +57,9 @@ docker run --name jenkins-blueocean --rm --detach \
   --volume jenkins-docker-certs:/certs/client:ro \
   --volume "$HOME":/home \
   --env JAVA_OPTS="-Dhudson.plugins.git.GitSCM.ALLOW_LOCAL_CHECKOUT=true" \
-  myjenkins-blueocean:2.452.2-1
+  myjenkins-blueocean:2.452.3-1
 ```
 ### Get begin key for setting jenkins
-- ```docker logs myjenkins-blueocean:2.452.2-1```
+```
+docker logs jenkins-blueocean
+```
