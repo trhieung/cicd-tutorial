@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-deha02)bs57yve3atvnyg8q^fv%3!lgg2&o^2m$f@w)exzi22r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", True)
 
-ALLOWED_HOSTS = ['172.18.0.3', 'localhost', '127.0.0.1', '*']
+ALLOWED_HOSTS = ['*']
 
 if os.environ.get("ALLOWED_HOSTS") is not None:
     try:
@@ -101,23 +101,23 @@ DATABASES = {
     }
 }
 
-# DATABASES_ALL = {
-#     DB_SQLITE: {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     },
-#     DB_POSTGRESQL: {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
-#         "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
-#         "USER": os.environ.get("POSTGRES_USER", "postgres"),
-#         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
-#         "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
-#     },
-# }
+DATABASES_ALL = {
+    DB_SQLITE: {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    },
+    DB_POSTGRESQL: {
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ.get("POSTGRES_HOST", "0.0.0.0"),
+        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+        "USER": os.environ.get("POSTGRES_USER", "postgres"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
+        "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
+    },
+}
 
-# ## Using Postgres
-# DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB", DB_SQLITE)]}
+## Using Postgres
+DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB", DB_SQLITE)]}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
