@@ -106,18 +106,27 @@ DATABASES_ALL = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     },
+    # DB_POSTGRESQL: {
+    #     "ENGINE": "django.db.backends.postgresql",
+    #     "HOST": os.environ.get("POSTGRES_HOST", "0.0.0.0"),
+    #     "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+    #     "USER": os.environ.get("POSTGRES_USER", "postgres"),
+    #     "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
+    #     "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
+    # },
+
     DB_POSTGRESQL: {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": os.environ.get("POSTGRES_HOST", "0.0.0.0"),
-        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
-        "USER": os.environ.get("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "postgres"),
-        "PORT": int(os.environ.get("POSTGRES_PORT", "5432")),
+        "HOST": os.environ.get("POSTGRES_HOST"),
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "PORT": int(os.environ.get("POSTGRES_PORT")),
     },
 }
 
 ## Using Postgres
-DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB", DB_SQLITE)]}
+DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB")]}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
