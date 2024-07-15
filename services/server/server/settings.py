@@ -133,7 +133,7 @@ DATABASES_ALL = {
 }
 
 ## Using Postgres
-DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB")]}
+DATABASES = {"default": DATABASES_ALL[os.environ.get("DJANGO_DB"), DB_SQLITE]}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

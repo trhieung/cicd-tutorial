@@ -32,6 +32,7 @@ pipeline {
         docker logs cicd-pipeline-db-1
         docker logs cicd-pipeline-server-1
         docker logs cicd-pipeline-vite-ts-1
+        docker compose down
         '''
       }
     }
